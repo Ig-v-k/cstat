@@ -1,7 +1,7 @@
 name: crgpt
 on:
   pull_request:
-    branches: [master]
+    branches: [main]
 permissions:
   pull-requests: write
   contents: read
