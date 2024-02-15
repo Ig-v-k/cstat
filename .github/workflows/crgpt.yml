@@ -1,4 +1,4 @@
-name: Code Review GPT
+name: crgpt
 on:
   pull_request:
     branches: [master]
