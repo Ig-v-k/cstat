@@ -1,7 +1,11 @@
 package com.iw.cstat;
 
+import io.javalin.Javalin;
+
 public class App {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Javalin.create()
+                .get("/", ctx -> ctx.result("Hello World"))
+                .start(8080);
     }
 }
