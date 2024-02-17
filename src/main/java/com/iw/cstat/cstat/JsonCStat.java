@@ -1,24 +1,28 @@
 package com.iw.cstat.cstat;
 
 import com.google.gson.Gson;
-import com.iw.cstat.CStat;
-import com.iw.cstat.Data;
-import com.iw.cstat.Serialize;
+import com.iw.cstat.*;
 import com.iw.cstat.data.SimpleData;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.iw.cstat.jsonapi.SimpleJsonApi;
+import com.iw.cstat.links.SimpleLinks;
+import com.iw.cstat.meta.SimpleMeta;
 
 public final class JsonCStat implements CStat {
 
     private final Data data;
+    private final Links links;
+    private final Meta meta;
+    private final JsonApi jsonApi;
 
     public JsonCStat() {
-        this(null);
+        this(null, null, null, null);
     }
 
-    public JsonCStat(Data data) {
+    public JsonCStat(Data data, Links links, Meta meta, JsonApi jsonApi) {
         this.data = data;
+        this.links = links;
+        this.meta = meta;
+        this.jsonApi = jsonApi;
     }
 
     @Override
@@ -26,6 +30,9 @@ public final class JsonCStat implements CStat {
         final String str = (String) from;
         return new Gson().newBuilder()
                 .registerTypeAdapter(Data.class, new Serialize<>(SimpleData.class))
+                .registerTypeAdapter(Links.class, new Serialize<>(SimpleLinks.class))
+                .registerTypeAdapter(Meta.class, new Serialize<>(SimpleMeta.class))
+                .registerTypeAdapter(JsonApi.class, new Serialize<>(SimpleJsonApi.class))
                 .registerTypeAdapter(CStat.class, new Serialize<>(JsonCStat.class))
                 .create()
                 .fromJson(str, CStat.class);
@@ -34,5 +41,20 @@ public final class JsonCStat implements CStat {
     @Override
     public Data data() {
         return data;
+    }
+
+    @Override
+    public Links links() {
+        return links;
+    }
+
+    @Override
+    public Meta meta() {
+        return meta;
+    }
+
+    @Override
+    public JsonApi jsonApi() {
+        return jsonApi;
     }
 }
