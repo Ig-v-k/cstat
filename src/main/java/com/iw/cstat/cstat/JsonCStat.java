@@ -11,13 +11,13 @@ import java.util.List;
 
 public final class JsonCStat implements CStat {
 
-    private final List<Data> data;
+    private final Data data;
 
     public JsonCStat() {
-        this(new ArrayList<>());
+        this(null);
     }
 
-    public JsonCStat(List<Data> data) {
+    public JsonCStat(Data data) {
         this.data = data;
     }
 
@@ -32,7 +32,7 @@ public final class JsonCStat implements CStat {
     }
 
     @Override
-    public List<Data> products() {
+    public Data data() {
         return data;
     }
 }
