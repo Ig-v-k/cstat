@@ -5,5 +5,5 @@ public interface CStat {
     Data data();
     Links links();
     Meta meta();
-    JsonApi jsonApi();
+    JsonApi jsonapi();
 }

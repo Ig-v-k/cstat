@@ -12,17 +12,17 @@ public final class JsonCStat implements CStat {
     private final Data data;
     private final Links links;
     private final Meta meta;
-    private final JsonApi jsonApi;
+    private final JsonApi jsonapi;
 
     public JsonCStat() {
         this(null, null, null, null);
     }
 
-    public JsonCStat(Data data, Links links, Meta meta, JsonApi jsonApi) {
+    public JsonCStat(Data data, Links links, Meta meta, JsonApi jsonapi) {
         this.data = data;
         this.links = links;
         this.meta = meta;
-        this.jsonApi = jsonApi;
+        this.jsonapi = jsonapi;
     }
 
     @Override
@@ -54,7 +54,7 @@ public final class JsonCStat implements CStat {
     }
 
     @Override
-    public JsonApi jsonApi() {
-        return jsonApi;
+    public JsonApi jsonapi() {
+        return jsonapi;
     }
 }

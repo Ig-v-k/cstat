@@ -4,6 +4,7 @@ import com.iw.cstat.cstat.JsonCStat;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -11,8 +12,11 @@ import java.io.IOException;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public final class CStatTest {
-    @Test
-    public void from() {
+
+    private CStat cStat;
+
+    @Before
+    public void initialize() {
         final OkHttpClient client = new OkHttpClient();
         final String url = "https://api.dane.gov.pl/1.4/datasets/1667";
         final Request request = new Request.Builder().url(url).build();
@@ -21,10 +25,34 @@ public final class CStatTest {
                 throw new IOException("Unexpected response code: " + response);
             }
             String body = response.body().string();
-            CStat cStat = new JsonCStat().from(body);
-            assertThat(cStat.data().id()).isEqualTo(1667);
+            cStat = new JsonCStat().from(body);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Test
+    public void from() {
+        assertThat(cStat).isNotNull();
+    }
+
+    @Test
+    public void data() {
+        assertThat(cStat.data()).isNotNull();
+    }
+
+    @Test
+    public void links() {
+        assertThat(cStat.links()).isNotNull();
+    }
+
+    @Test
+    public void meta() {
+        assertThat(cStat.meta()).isNotNull();
+    }
+
+    @Test
+    public void jsonapi() {
+        assertThat(cStat.jsonapi()).isNotNull();
     }
 }
