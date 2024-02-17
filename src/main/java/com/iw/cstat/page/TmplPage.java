@@ -35,7 +35,6 @@ public final class TmplPage implements Page {
                         facet.tag(),
                         ftr()
                 )
-
         ).render();
     }
 
