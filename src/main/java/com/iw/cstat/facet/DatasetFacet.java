@@ -20,6 +20,8 @@ public final class DatasetFacet implements Facet<DivTag> {
 
     @Override
     public Tag<DivTag> tag() {
-        return div(ul(each(data, d -> li(String.valueOf(d.id())))));
+        return div(
+                ul(each(data, d -> li(
+                        a(d.attributes().title()).withHref("/" + d.id())))));
     }
 }
