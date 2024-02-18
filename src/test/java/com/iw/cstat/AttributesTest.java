@@ -21,8 +21,20 @@ public final class AttributesTest {
     }
 
     @Test
+    public void notesAvailable() {
+        final String notes = attributes.notes();
+        assertThat(notes).isNotEmpty();
+    }
+
+    @Test
     public void titleAvailable() {
         final String title = attributes.title();
         assertThat(title).isNotEmpty();
+    }
+
+    @Test
+    public void viewsCountAvailable() {
+        final int viewsCount = attributes.viewsCount();
+        assertThat(viewsCount).isGreaterThanOrEqualTo(0);
     }
 }

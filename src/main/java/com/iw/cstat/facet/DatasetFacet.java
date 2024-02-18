@@ -1,8 +1,10 @@
 package com.iw.cstat.facet;
 
 import com.iw.cstat.Data;
-import com.iw.cstat.Dataset;
 import com.iw.cstat.Facet;
+import j2html.TagCreator;
+import j2html.tags.DomContent;
+import j2html.tags.EmptyTag;
 import j2html.tags.Tag;
 import j2html.tags.specialized.DivTag;
 
@@ -20,8 +22,10 @@ public final class DatasetFacet implements Facet<DivTag> {
 
     @Override
     public Tag<DivTag> tag() {
-        return div(
-                ul(each(data, d -> li(
-                        a(d.attributes().title()).withHref("/" + d.id())))));
+        return div(each(data, d -> section(article(
+                head(h2(d.attributes().title())),
+                main(rawHtml(d.attributes().notes())),
+                footer(String.valueOf(d.attributes().viewsCount()))
+        ))));
     }
 }
