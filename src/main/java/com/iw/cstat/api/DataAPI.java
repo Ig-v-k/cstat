@@ -7,6 +7,10 @@ public final class DataAPI implements API {
     private final API api;
     private final String id;
 
+    public DataAPI(API api, int id) {
+        this(api, String.valueOf(id));
+    }
+
     public DataAPI(API api, String id) {
         this.api = api;
         this.id = id;
