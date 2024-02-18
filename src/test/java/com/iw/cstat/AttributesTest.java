@@ -14,7 +14,7 @@ public final class AttributesTest {
 
     @Before
     public void initialize() {
-        final Res res = new RequestRes(new ApiOf(1667));
+        final Res res = new RequestRes(new ApiOf(1681));
         final CStat cStat = new JsonCStat().from(res.body());
         final Data data = cStat.data();
         this.attributes = data.attributes();

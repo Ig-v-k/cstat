@@ -28,6 +28,7 @@ public final class TmplPage implements Page {
                         meta().withName("description").withContent("Country statistic"),
                         title(title.isEmpty() ? "cstat" : title),
                         link().withRel("stylesheet").withHref("/css/simple.min.css"),
+                        link().withRel("stylesheet").withHref("/css/style.css"),
                         link().withRel("icon").withType("image/png").withHref("/images/logo/logo_32.png")
                 ),
                 body(

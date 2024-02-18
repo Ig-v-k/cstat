@@ -18,7 +18,7 @@ public final class CStatTest {
     @Before
     public void initialize() {
         final OkHttpClient client = new OkHttpClient();
-        final String url = "https://api.dane.gov.pl/1.4/datasets/1667";
+        final String url = "https://api.dane.gov.pl/1.4/datasets/1681";
         final Request request = new Request.Builder().url(url).build();
         try (final Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
