@@ -23,9 +23,12 @@ public final class DatasetFacet implements Facet<DivTag> {
     @Override
     public Tag<DivTag> tag() {
         return div(each(data, d -> section(article(
-                head(h2(d.attributes().title())),
+                header(h2(d.attributes().title())),
                 main(rawHtml(d.attributes().notes())),
-                footer(String.valueOf(d.attributes().viewsCount()))
+                footer(ul(
+                        li(String.format("%s Views", d.attributes().viewsCount())),
+                        li()
+                ))
         ))));
     }
 }
