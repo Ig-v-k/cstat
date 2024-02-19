@@ -5,6 +5,7 @@ import com.iw.cstat.Data;
 import com.iw.cstat.Facet;
 import j2html.tags.Tag;
 import j2html.tags.specialized.DivTag;
+import j2html.tags.specialized.PTag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,21 +25,11 @@ public final class DatasetFacet implements Facet<DivTag> {
 
     @Override
     public Tag<DivTag> tag() {
-        final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
         return div(each(cStats, cStat -> {
             final Data data = cStat.data();
             return section(article(
                     header(
-                            h2(a(data.attributes().title()).withHref("/" + data.id())),
-                            p(join(
-                                    LocalDateTime.parse(
-                                            data.attributes().verified(),
-                                            inputFormatter
-                                    ).format(DateTimeFormatter.ofLocalizedDate(
-                                            FormatStyle.LONG).withLocale(
-                                                    Locale.forLanguageTag(cStat.meta().language()))),
-                                    " • "
-                            ))),
+                            h2(a(data.attributes().title()).withHref("/" + data.id())), subline(cStat)),
                     div(attrs(".truncate"),
                             rawHtml(data.attributes().notes())),
                     footer(p(join(
@@ -48,5 +39,18 @@ public final class DatasetFacet implements Facet<DivTag> {
                     )))
             ));
         }));
+    }
+
+    private Tag<PTag> subline(final CStat cStat) {
+        final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        return p(join(
+                LocalDateTime.parse(
+                        cStat.data().attributes().verified(),
+                        inputFormatter).format(DateTimeFormatter.ofLocalizedDate(
+                                FormatStyle.LONG).withLocale(
+                                        Locale.forLanguageTag(cStat.meta().language()))),
+                " • ",
+                String.format("%s resources", cStat.data().relationships().resources().meta().count())
+        ));
     }
 }
