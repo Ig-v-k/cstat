@@ -29,7 +29,7 @@ public final class DatasetFacet implements Facet<DivTag> {
             final Data data = cStat.data();
             return section(article(
                     header(
-                            h2(data.attributes().title()),
+                            h2(a(data.attributes().title()).withHref("/" + data.id())),
                             p(join(
                                     LocalDateTime.parse(
                                             data.attributes().verified(),
