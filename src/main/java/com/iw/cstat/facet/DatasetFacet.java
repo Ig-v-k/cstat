@@ -23,11 +23,11 @@ public final class DatasetFacet implements Facet<DivTag> {
                 header(
                         h2(d.attributes().title()),
                         p(join(d.attributes().verified()))),
-                main(attrs(".truncate"), rawHtml(d.attributes().notes())),
+                div(attrs(".truncate"), rawHtml(d.attributes().notes())),
                 footer(p(join(
-                        String.format("%s Views", d.attributes().viewsCount()),
+                        b(String.valueOf(d.attributes().viewsCount())), "Views",
                         " • ",
-                        String.format("%s Downloads", d.attributes().downloadsCount())
+                        b(String.valueOf(d.attributes().downloadsCount())), "Downloads"
                 )))
         ))));
     }
