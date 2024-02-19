@@ -7,6 +7,8 @@ import com.iw.cstat.data.SimpleData;
 import com.iw.cstat.jsonapi.SimpleJsonApi;
 import com.iw.cstat.links.SimpleLinks;
 import com.iw.cstat.meta.SimpleMeta;
+import com.iw.cstat.relationships.SimpleRelationships;
+import com.iw.cstat.resources.SimpleResources;
 
 public final class JsonCStat implements CStat {
 
@@ -35,6 +37,8 @@ public final class JsonCStat implements CStat {
                 .registerTypeAdapter(Meta.class, new Serialize<>(SimpleMeta.class))
                 .registerTypeAdapter(JsonApi.class, new Serialize<>(SimpleJsonApi.class))
                 .registerTypeAdapter(Attributes.class, new Serialize<>(SimpleAttributes.class))
+                .registerTypeAdapter(Relationships.class, new Serialize<>(SimpleRelationships.class))
+                .registerTypeAdapter(Resources.class, new Serialize<>(SimpleResources.class))
                 .registerTypeAdapter(CStat.class, new Serialize<>(JsonCStat.class))
                 .create()
                 .fromJson(str, CStat.class);
