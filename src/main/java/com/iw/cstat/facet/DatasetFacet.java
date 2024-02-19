@@ -29,14 +29,11 @@ public final class DatasetFacet implements Facet<DivTag> {
             final Data data = cStat.data();
             return section(article(
                     header(
-                            h2(a(data.attributes().title()).withHref("/" + data.id())), subline(cStat)),
+                            h2(a(data.attributes().title()).withHref("/" + data.id())),
+                            subline(cStat)),
                     div(attrs(".truncate"),
                             rawHtml(data.attributes().notes())),
-                    footer(p(join(
-                            b(String.valueOf(data.attributes().viewsCount())), "Views",
-                            " • ",
-                            b(String.valueOf(data.attributes().downloadsCount())), "Downloads"
-                    )))
+                    footer(footline(data))
             ));
         }));
     }
@@ -51,6 +48,14 @@ public final class DatasetFacet implements Facet<DivTag> {
                                         Locale.forLanguageTag(cStat.meta().language()))),
                 " • ",
                 String.format("%s resources", cStat.data().relationships().resources().meta().count())
+        ));
+    }
+
+    private Tag<PTag> footline(final Data data) {
+        return p(join(
+                b(String.valueOf(data.attributes().viewsCount())), "Views",
+                " • ",
+                b(String.valueOf(data.attributes().downloadsCount())), "Downloads"
         ));
     }
 }
