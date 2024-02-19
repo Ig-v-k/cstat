@@ -12,7 +12,7 @@ public final class CustomDatasetTest {
     public void list() {
         final String[] ids = new String[] {"1681"};
         final Dataset dataset = new CustomDataset(ids);
-        final List<Data> list = dataset.list();
+        final List<CStat> list = dataset.list();
         assertThat(list).hasSizeGreaterThan(0);
     }
 }
