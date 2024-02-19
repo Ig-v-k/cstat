@@ -1,34 +1,52 @@
 package com.iw.cstat.facet;
 
+import com.iw.cstat.CStat;
 import com.iw.cstat.Data;
 import com.iw.cstat.Facet;
 import j2html.tags.Tag;
 import j2html.tags.specialized.DivTag;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
+import java.util.Locale;
 
 import static j2html.TagCreator.*;
 
 public final class DatasetFacet implements Facet<DivTag> {
 
-    private final List<Data> data;
+    private final List<CStat> cStats;
 
-    public DatasetFacet(List<Data> data) {
-        this.data = data;
+    public DatasetFacet(List<CStat> cStats) {
+        this.cStats = cStats;
     }
 
     @Override
     public Tag<DivTag> tag() {
-        return div(each(data, d -> section(article(
-                header(
-                        h2(d.attributes().title()),
-                        p(join(d.attributes().verified()))),
-                div(attrs(".truncate"), rawHtml(d.attributes().notes())),
-                footer(p(join(
-                        b(String.valueOf(d.attributes().viewsCount())), "Views",
-                        " • ",
-                        b(String.valueOf(d.attributes().downloadsCount())), "Downloads"
-                )))
-        ))));
+        final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        return div(each(cStats, cStat -> {
+            final Data data = cStat.data();
+            return section(article(
+                    header(
+                            h2(data.attributes().title()),
+                            p(join(
+                                    LocalDateTime.parse(
+                                            data.attributes().verified(),
+                                            inputFormatter
+                                    ).format(DateTimeFormatter.ofLocalizedDate(
+                                            FormatStyle.LONG).withLocale(
+                                                    Locale.forLanguageTag(cStat.meta().language()))),
+                                    " • "
+                            ))),
+                    div(attrs(".truncate"),
+                            rawHtml(data.attributes().notes())),
+                    footer(p(join(
+                            b(String.valueOf(data.attributes().viewsCount())), "Views",
+                            " • ",
+                            b(String.valueOf(data.attributes().downloadsCount())), "Downloads"
+                    )))
+            ));
+        }));
     }
 }

@@ -22,15 +22,15 @@ public final class CustomDataset implements Dataset {
     }
 
     @Override
-    public List<Data> list() {
-        final List<Data> data = new ArrayList<>(1);
+    public List<CStat> list() {
+        final List<CStat> cStats = new ArrayList<>(1);
         final CStat cStat = new JsonCStat();
         for (String id : ids) {
             final Res res =
                     new RequestRes(new DataAPI(new DatasetsAPI(new PolishAPI()), id));
             final CStat from = cStat.from(res.body());
-            data.add(from.data());
+            cStats.add(from);
         }
-        return data;
+        return cStats;
     }
 }
