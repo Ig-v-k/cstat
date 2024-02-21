@@ -11,12 +11,14 @@ public final class SimpleData implements Data {
     private final Attributes attributes;
     private final Relationships relationships;
     private final Links links;
+    private final String type;
 
-    public SimpleData(String id, Attributes attributes, Relationships relationships, Links links) {
+    public SimpleData(String id, Attributes attributes, Relationships relationships, Links links, String type) {
         this.id = id;
         this.attributes = attributes;
         this.relationships = relationships;
         this.links = links;
+        this.type = type;
     }
 
     @Override
@@ -37,5 +39,10 @@ public final class SimpleData implements Data {
     @Override
     public Links links() {
         return links;
+    }
+
+    @Override
+    public String type() {
+        return type;
     }
 }

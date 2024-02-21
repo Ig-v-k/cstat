@@ -5,4 +5,5 @@ public interface Data {
     Attributes attributes();
     Relationships relationships();
     Links links();
+    String type();
 }
