@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.iw.cstat.*;
 import com.iw.cstat.atttributes.SimpleAttributes;
 import com.iw.cstat.data.SimpleData;
+import com.iw.cstat.institution.SimpleInstitution;
 import com.iw.cstat.jsonapi.SimpleJsonApi;
 import com.iw.cstat.links.SimpleLinks;
 import com.iw.cstat.meta.SimpleMeta;
@@ -38,6 +39,7 @@ public final class JsonCStat implements CStat {
                 .registerTypeAdapter(JsonApi.class, new Serialize<>(SimpleJsonApi.class))
                 .registerTypeAdapter(Attributes.class, new Serialize<>(SimpleAttributes.class))
                 .registerTypeAdapter(Relationships.class, new Serialize<>(SimpleRelationships.class))
+                .registerTypeAdapter(Institution.class, new Serialize<>(SimpleInstitution.class))
                 .registerTypeAdapter(Resources.class, new Serialize<>(SimpleResources.class))
                 .registerTypeAdapter(CStat.class, new Serialize<>(JsonCStat.class))
                 .create()
