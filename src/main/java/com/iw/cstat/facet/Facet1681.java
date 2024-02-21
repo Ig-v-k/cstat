@@ -1,5 +1,6 @@
 package com.iw.cstat.facet;
 
+import com.iw.cstat.API;
 import com.iw.cstat.CStat;
 import com.iw.cstat.CStats;
 import com.iw.cstat.Facet;
@@ -9,6 +10,7 @@ import com.iw.cstat.cstat.JsonCStats;
 import com.iw.cstat.res.RequestRes;
 import j2html.tags.Tag;
 import j2html.tags.specialized.DivTag;
+import j2html.tags.specialized.PTag;
 
 import static j2html.TagCreator.*;
 
@@ -22,10 +24,22 @@ public final class Facet1681 implements Facet<DivTag> {
 
     @Override
     public Tag<DivTag> tag() {
-        final CStats mans = new JsonCStats().from(
-                new RequestRes(new ResourcesAPI(new ApiOf(1681), "created[gte]=2023")).body());
+        final CStats cStats = new JsonCStats();
+        final API api1681 = new ApiOf(1681);
+        final CStats mans = cStats.from(new RequestRes(new ResourcesAPI(api1681, "title[phrase]=m%C4%99skie", "created[gte]=2023")).body());
+        final CStats woman = cStats.from(new RequestRes(new ResourcesAPI(api1681, "title[phrase]=%C5%BCe%C5%84skie", "created[gte]=2023")).body());
         return div(
-                header(h1(cStat.data().attributes().title()))
+                header(
+                        h1(cStat.data().attributes().title()),
+                        subline()),
+                div(rawHtml(cStat.data().attributes().notes()))
         );
+    }
+
+    private static PTag subline() {
+        return p(join(
+                "Polish", " • ",
+
+                ));
     }
 }
