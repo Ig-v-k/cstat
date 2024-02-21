@@ -3,6 +3,7 @@ package com.iw.cstat.facet;
 import com.iw.cstat.CStat;
 import com.iw.cstat.Data;
 import com.iw.cstat.Facet;
+import com.iw.cstat.dat.DateFormat;
 import j2html.tags.Tag;
 import j2html.tags.specialized.DivTag;
 import j2html.tags.specialized.PTag;
@@ -39,14 +40,11 @@ public final class DatasetFacet implements Facet<DivTag> {
     }
 
     private Tag<PTag> subline(final CStat cStat) {
-        final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        return p(join(
-                LocalDateTime.parse(
-                        cStat.data().attributes().verified(),
-                        inputFormatter).format(DateTimeFormatter.ofLocalizedDate(
-                                FormatStyle.LONG).withLocale(
-                                        Locale.forLanguageTag(cStat.meta().language()))),
-                " • ",
+        final String verified = new DateFormat(
+                "yyyy-MM-dd'T'HH:mm:ss'Z'",
+                cStat.data().attributes().verified(),
+                cStat.meta().language()).text();
+        return p(join(verified, " • ",
                 String.format("%s resources", cStat.data().relationships().resources().meta().count())
         ));
     }

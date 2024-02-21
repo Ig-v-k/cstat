@@ -7,6 +7,7 @@ import com.iw.cstat.Facet;
 import com.iw.cstat.api.ApiOf;
 import com.iw.cstat.api.ResourcesAPI;
 import com.iw.cstat.cstat.JsonCStats;
+import com.iw.cstat.dat.DateFormat;
 import com.iw.cstat.res.RequestRes;
 import j2html.tags.Tag;
 import j2html.tags.specialized.DivTag;
@@ -31,15 +32,19 @@ public final class Facet1681 implements Facet<DivTag> {
         return div(
                 header(
                         h1(cStat.data().attributes().title()),
-                        subline()),
+                        subline(cStat)),
                 div(rawHtml(cStat.data().attributes().notes()))
         );
     }
 
-    private static PTag subline() {
+    private static PTag subline(final CStat cStat) {
+        final String verified = new DateFormat(
+                "yyyy-MM-dd'T'HH:mm:ss'Z'",
+                cStat.data().attributes().verified(),
+                cStat.meta().language()).text();
         return p(join(
                 "Polish", " • ",
-
-                ));
+                verified, " • "
+        ));
     }
 }
