@@ -5,6 +5,7 @@ public interface Attributes {
     String verified();
     String notes();
     String title();
+    String website();
     int viewsCount();
     int downloadsCount();
 }

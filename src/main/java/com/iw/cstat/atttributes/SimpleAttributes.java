@@ -8,14 +8,16 @@ public final class SimpleAttributes implements Attributes {
     private final String verified;
     private final String notes;
     private final String title;
+    private final String website;
     private final int views_count;
     private final int downloads_count;
 
-    public SimpleAttributes(String slug, String verified, String notes, String title, int views_count, int downloads_count) {
+    public SimpleAttributes(String slug, String verified, String notes, String title, String website, int views_count, int downloads_count) {
         this.slug = slug;
         this.verified = verified;
         this.notes = notes;
         this.title = title;
+        this.website = website;
         this.views_count = views_count;
         this.downloads_count = downloads_count;
     }
@@ -38,6 +40,11 @@ public final class SimpleAttributes implements Attributes {
     @Override
     public String title() {
         return title;
+    }
+
+    @Override
+    public String website() {
+        return website;
     }
 
     @Override

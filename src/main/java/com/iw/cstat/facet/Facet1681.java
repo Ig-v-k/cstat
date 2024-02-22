@@ -46,9 +46,9 @@ public final class Facet1681 implements Facet<DivTag> {
         final CStat institution = cStat.from(new RequestRes(
                 new InstitutionOf(cStat.data().relationships().institution().data().id())).body());
         return p(join(
-                institution.data().attributes().title(), " • ",
+                a(institution.data().attributes().title()).withHref(institution.data().attributes().website()), " • ",
                 "Polish", " • ",
-                verified, " • "
+                verified
         ));
     }
 }
