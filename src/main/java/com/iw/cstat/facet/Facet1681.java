@@ -4,7 +4,7 @@ import com.iw.cstat.API;
 import com.iw.cstat.CStat;
 import com.iw.cstat.CStats;
 import com.iw.cstat.Facet;
-import com.iw.cstat.api.ApiOf;
+import com.iw.cstat.api.DatasetOf;
 import com.iw.cstat.api.ResourcesAPI;
 import com.iw.cstat.cstat.JsonCStats;
 import com.iw.cstat.dat.DateFormat;
@@ -26,7 +26,7 @@ public final class Facet1681 implements Facet<DivTag> {
     @Override
     public Tag<DivTag> tag() {
         final CStats cStats = new JsonCStats();
-        final API api1681 = new ApiOf(1681);
+        final API api1681 = new DatasetOf(1681);
         final CStats mans = cStats.from(new RequestRes(new ResourcesAPI(api1681, "title[phrase]=m%C4%99skie", "created[gte]=2023")).body());
         final CStats woman = cStats.from(new RequestRes(new ResourcesAPI(api1681, "title[phrase]=%C5%BCe%C5%84skie", "created[gte]=2023")).body());
         return div(

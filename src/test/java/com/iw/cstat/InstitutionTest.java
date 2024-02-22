@@ -1,6 +1,6 @@
 package com.iw.cstat;
 
-import com.iw.cstat.api.ApiOf;
+import com.iw.cstat.api.DatasetOf;
 import com.iw.cstat.cstat.JsonCStat;
 import com.iw.cstat.res.RequestRes;
 import org.junit.Before;
@@ -14,7 +14,7 @@ public final class InstitutionTest {
 
     @Before
     public void initialization() {
-        final Res res = new RequestRes(new ApiOf(1681));
+        final Res res = new RequestRes(new DatasetOf(1681));
         this.cStat = new JsonCStat().from(res.body());
     }
 
