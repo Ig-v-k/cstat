@@ -8,4 +8,6 @@ public interface Attributes {
     String website();
     int viewsCount();
     int downloadsCount();
+    Col1 col1();
+    Col2 col2();
 }

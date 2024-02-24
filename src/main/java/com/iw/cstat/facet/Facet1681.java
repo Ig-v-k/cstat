@@ -42,8 +42,8 @@ public final class Facet1681 implements Facet<DivTag> {
                                 p("Meskie:"),
                                 table(
                                         tbody(each(dataTable, i -> tr(
-                                                td(i.attributes().col1()),
-                                                td(i.attributes().col2())
+                                                td(i.attributes().col1().repr()),
+                                                td(i.attributes().col2().repr())
                                         )))
                                 )),
                         div(
