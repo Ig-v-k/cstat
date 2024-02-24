@@ -15,6 +15,6 @@ public final class ResourceAPI implements API {
     @Override
     public String url() {
         final String url = api.url();
-        return url + "/resource/" + id;
+        return url + "/resources/" + id;
     }
 }
