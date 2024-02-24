@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public final class ResTest {
     @Test
     public void body() {
-        final Res res = new RequestRes(new DatasetsAPI(new PolishAPI()));
+        final Res res = new RequestRes(new DatasetsAPI(new PolishAPI(), 1681));
         assertThat(res.body()).isNotEmpty();
     }
 }

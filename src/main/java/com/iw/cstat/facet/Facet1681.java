@@ -40,8 +40,18 @@ public final class Facet1681 implements Facet<DivTag> {
                 div(
                         rawHtml(cStat.data().attributes().notes()),
                         h3("Statystyka:"),
-                        p(join(b("NOWAK"), " - 99310")),
-                        p(join(b("NOWAK"), " - 100906"))
+                        div(
+                                p("Meskie:"),
+                                table(
+                                        tbody()
+                                )),
+                        div(
+                                p("Zenskie:"),
+                                ol(
+                                        li(join(b("NOWAK1"), " - 999999")),
+                                        li(join(b("NOWAK2"), " - 999999")),
+                                        li(join(b("NOWAK3"), " - 999999"))
+                                ))
                 )
         );
     }
