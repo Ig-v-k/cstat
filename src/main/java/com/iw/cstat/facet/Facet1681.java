@@ -2,7 +2,6 @@ package com.iw.cstat.facet;
 
 import com.iw.cstat.*;
 import com.iw.cstat.api.*;
-import com.iw.cstat.cstat.JsonCStat;
 import com.iw.cstat.cstat.JsonCStats;
 import com.iw.cstat.dat.DateFormat;
 import com.iw.cstat.res.RequestRes;
@@ -10,7 +9,6 @@ import j2html.tags.Tag;
 import j2html.tags.specialized.DivTag;
 import j2html.tags.specialized.PTag;
 
-import java.util.Calendar;
 import java.util.List;
 
 import static j2html.TagCreator.*;
@@ -31,12 +29,12 @@ public final class Facet1681 implements Facet<DivTag> {
         final CStats resources1 = cStats.from(new RequestRes(new ResourcesAPI(api1681, "title[phrase]=m%C4%99skie", "created[gte]=2024")).body());
         final Data data1 = resources1.data().get(0);
         final CStats man = cStats.from(new RequestRes(new DataAPI(new ResourceOf(data1.id()))).body());
-        final List<Data> mansTable = man.data();
+        final List<Data> mansTable = man.data().subList(0, 3);
 
         final CStats resources2 = cStats.from(new RequestRes(new ResourcesAPI(api1681, "title[phrase]=%C5%BCe%C5%84skie", "created[gte]=2024")).body());
         final Data data2 = resources2.data().get(0);
         final CStats woman = cStats.from(new RequestRes(new DataAPI(new ResourceOf(data2.id()))).body());
-        final List<Data> womanTable = woman.data();
+        final List<Data> womanTable = woman.data().subList(0, 3);
 
         return div(
                 header(
