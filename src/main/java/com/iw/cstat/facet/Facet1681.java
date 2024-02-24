@@ -27,10 +27,17 @@ public final class Facet1681 implements Facet<DivTag> {
     public Tag<DivTag> tag() {
         final CStats cStats = new JsonCStats();
         final API api1681 = new DatasetOf(1681);
+
         final CStats resources1 = cStats.from(new RequestRes(new ResourcesAPI(api1681, "title[phrase]=m%C4%99skie", "created[gte]=2024")).body());
-        final Data man = resources1.data().get(0);
-        final CStats data = cStats.from(new RequestRes(new DataAPI(new ResourceOf(man.id()))).body());
-        final List<Data> dataTable = data.data();
+        final Data data1 = resources1.data().get(0);
+        final CStats man = cStats.from(new RequestRes(new DataAPI(new ResourceOf(data1.id()))).body());
+        final List<Data> mansTable = man.data();
+
+        final CStats resources2 = cStats.from(new RequestRes(new ResourcesAPI(api1681, "title[phrase]=%C5%BCe%C5%84skie", "created[gte]=2024")).body());
+        final Data data2 = resources2.data().get(0);
+        final CStats woman = cStats.from(new RequestRes(new DataAPI(new ResourceOf(data2.id()))).body());
+        final List<Data> womanTable = woman.data();
+
         return div(
                 header(
                         h1(cStat.data().attributes().title()),
@@ -41,18 +48,17 @@ public final class Facet1681 implements Facet<DivTag> {
                         div(
                                 p("Meskie:"),
                                 table(
-                                        tbody(each(dataTable, i -> tr(
+                                        tbody(each(mansTable, i -> tr(
                                                 td(i.attributes().col1().repr()),
                                                 td(i.attributes().col2().repr())
-                                        )))
-                                )),
+                                        ))))),
                         div(
                                 p("Zenskie:"),
-                                ol(
-                                        li(join(b("NOWAK1"), " - 999999")),
-                                        li(join(b("NOWAK2"), " - 999999")),
-                                        li(join(b("NOWAK3"), " - 999999"))
-                                ))
+                                table(
+                                        tbody(each(womanTable, i -> tr(
+                                                td(i.attributes().col1().repr()),
+                                                td(i.attributes().col2().repr())
+                                        )))))
                 )
         );
     }
