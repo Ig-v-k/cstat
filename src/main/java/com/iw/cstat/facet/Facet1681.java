@@ -50,11 +50,12 @@ public final class Facet1681 implements Facet<DivTag> {
                                 p("Meskie:"),
                                 table(
                                         tbody(each(mansTable, (i, data) -> tr(
-                                                td(i.toString()),
+                                                td(String.valueOf(i + 1)),
                                                 td(data.attributes().col1().repr()),
                                                 td(
                                                         b(decimalFormat.format(data.attributes().col2().val())),
-                                                        span("+1,234 (11 %)↑"))
+                                                        br(),
+                                                        span(attrs(".positive"), "+1,234 (11 %)↑"))
                                         ))))),
                         div(
                                 p("Zenskie:"),
