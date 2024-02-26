@@ -9,6 +9,7 @@ import j2html.tags.Tag;
 import j2html.tags.specialized.DivTag;
 import j2html.tags.specialized.PTag;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import static j2html.TagCreator.*;
@@ -36,6 +37,8 @@ public final class Facet1681 implements Facet<DivTag> {
         final CStats woman = cStats.from(new RequestRes(new DataAPI(new ResourceOf(data2.id()))).body());
         final List<Data> womanTable = woman.data().subList(0, 3);
 
+        final DecimalFormat decimalFormat = new DecimalFormat("#,###,###,##0.00");
+
         return div(
                 header(
                         h1(cStat.data().attributes().title()),
@@ -46,16 +49,20 @@ public final class Facet1681 implements Facet<DivTag> {
                         div(
                                 p("Meskie:"),
                                 table(
-                                        tbody(each(mansTable, i -> tr(
-                                                td(i.attributes().col1().repr()),
-                                                td(i.attributes().col2().repr())
+                                        tbody(each(mansTable, (i, data) -> tr(
+                                                td(i.toString()),
+                                                td(data.attributes().col1().repr()),
+                                                td(
+                                                        b(decimalFormat.format(data.attributes().col2().val())),
+                                                        span("+1,234 (11 %)↑"))
                                         ))))),
                         div(
                                 p("Zenskie:"),
                                 table(
-                                        tbody(each(womanTable, i -> tr(
-                                                td(i.attributes().col1().repr()),
-                                                td(i.attributes().col2().repr())
+                                        tbody(each(womanTable, (i, data) -> tr(
+                                                td(i.toString()),
+                                                td(data.attributes().col1().repr()),
+                                                td(b(decimalFormat.format(data.attributes().col2().val())))
                                         )))))
                 )
         );
