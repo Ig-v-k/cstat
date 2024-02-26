@@ -47,7 +47,7 @@ public final class Facet1681 implements Facet<DivTag> {
                         rawHtml(cStat.data().attributes().notes()),
                         h3("Statystyka:"),
                         div(
-                                p("Meskie:"),
+                                p("Męskie:"),
                                 table(
                                         tbody(each(mansTable, (i, data) -> tr(
                                                 td(String.valueOf(i + 1)),
@@ -58,7 +58,7 @@ public final class Facet1681 implements Facet<DivTag> {
                                                         span(attrs(".positive"), "+1,234 (11 %)↑"))
                                         ))))),
                         div(
-                                p("Zenskie:"),
+                                p("Żeńskie:"),
                                 table(
                                         tbody(each(womanTable, (i, data) -> tr(
                                                 td(i.toString()),
