@@ -27,10 +27,13 @@ public final class Facet1681 implements Facet<DivTag> {
         final CStats cStats = new JsonCStats();
         final API api1681 = new DatasetOf(1681);
 
-        final CStats resources1 = cStats.from(new RequestRes(new ResourcesAPI(api1681, "title[phrase]=m%C4%99skie", "created[gte]=2024")).body());
-        final Data data1 = resources1.data().get(0);
-        final CStats man = cStats.from(new RequestRes(new DataAPI(new ResourceOf(data1.id()))).body());
-        final List<Data> mansTable = man.data().subList(0, 3);
+        final CStats resources1 = cStats.from(new RequestRes(new ResourcesAPI(api1681, "sort=-created", "title[phrase]=m%C4%99skie", "per_page=2")).body());
+        final Data dataYear = resources1.data().get(0);
+        final Data dataYearLow = resources1.data().get(1);
+        final CStats mansYear = cStats.from(new RequestRes(new DataAPI(new ResourceOf(dataYear.id()))).body());
+        final CStats mansYearLow = cStats.from(new RequestRes(new DataAPI(new ResourceOf(dataYearLow.id()), "per_page=100")).body());
+        final List<Data> mansYearTable = mansYear.data().subList(0, 3);
+        final List<Data> mansYearLowTable = mansYearLow.data();
 
         final CStats resources2 = cStats.from(new RequestRes(new ResourcesAPI(api1681, "title[phrase]=%C5%BCe%C5%84skie", "created[gte]=2024")).body());
         final Data data2 = resources2.data().get(0);
@@ -49,13 +52,13 @@ public final class Facet1681 implements Facet<DivTag> {
                         div(
                                 p("Męskie:"),
                                 table(
-                                        tbody(each(mansTable, (i, data) -> tr(
+                                        tbody(each(mansYearTable, (i, data) -> tr(
                                                 td(String.valueOf(i + 1)),
                                                 td(data.attributes().col1().repr()),
                                                 td(
                                                         b(decimalFormat.format(data.attributes().col2().val())),
                                                         br(),
-                                                        span(attrs(".positive"), "+1,234 (11 %)↑"))
+                                                        span(attrs(".positive"), String.valueOf(stat(data, mansYearLowTable))))
                                         ))))),
                         div(
                                 p("Żeńskie:"),
@@ -81,5 +84,16 @@ public final class Facet1681 implements Facet<DivTag> {
                 "Polish", " • ",
                 verified
         ));
+    }
+
+    private static double stat(final Data data, final List<Data> lastYearData) {
+        final Data dataYearLow = lastYearData.stream()
+                .filter(d -> d.attributes().col1().repr().equals(data.attributes().col1().repr()))
+                .findFirst()
+                .get();
+        final double valueYear = Double.parseDouble(String.valueOf(data.attributes().col2().val()));
+        final double valueYearLow = Double.parseDouble(String.valueOf(dataYearLow.attributes().col2().val()));
+        final double difference = valueYearLow - valueYear;
+        return difference;
     }
 }
