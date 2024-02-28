@@ -10,6 +10,7 @@ import com.iw.cstat.institution.SimpleInstitution;
 import com.iw.cstat.jsonapi.SimpleJsonApi;
 import com.iw.cstat.links.SimpleLinks;
 import com.iw.cstat.meta.SimpleMeta;
+import com.iw.cstat.regions.SimpleRegions;
 import com.iw.cstat.relationships.SimpleRelationships;
 import com.iw.cstat.resources.SimpleResources;
 
@@ -47,6 +48,7 @@ public final class JsonCStats implements CStats {
                 .registerTypeAdapter(Institution.class, new Serialize<>(SimpleInstitution.class))
                 .registerTypeAdapter(Col1.class, new Serialize<>(SimpleCol1.class))
                 .registerTypeAdapter(Col2.class, new Serialize<>(SimpleCol2.class))
+                .registerTypeAdapter(Regions.class, new Serialize<>(SimpleRegions.class))
                 .registerTypeAdapter(CStats.class, new Serialize<>(JsonCStats.class))
                 .create()
                 .fromJson(str, CStats.class);
