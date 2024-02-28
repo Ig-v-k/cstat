@@ -1,7 +1,6 @@
 package com.iw.cstat.dataset;
 
 import com.iw.cstat.CStat;
-import com.iw.cstat.Data;
 import com.iw.cstat.Dataset;
 import com.iw.cstat.Res;
 import com.iw.cstat.api.DataAPI;
@@ -27,7 +26,7 @@ public final class CustomDataset implements Dataset {
         final CStat cStat = new JsonCStat();
         for (String id : ids) {
             final Res res =
-                    new RequestRes(new DataAPI(new DatasetsAPI(new PolishAPI()), id));
+                    new RequestRes(new DatasetsAPI(new PolishAPI(), id));
             final CStat from = cStat.from(res.body());
             cStats.add(from);
         }

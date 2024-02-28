@@ -2,9 +2,9 @@ package com.iw.cstat;
 
 import java.util.List;
 
-public interface CStat {
-    CStat from(final Object from);
-    Data data();
+public interface CStats {
+    CStats from(final Object from);
+    List<Data> data();
     Links links();
     Meta meta();
     JsonApi jsonapi();

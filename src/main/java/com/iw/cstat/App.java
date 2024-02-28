@@ -14,6 +14,14 @@ public class App {
                 })
                 .get("/", ctx -> ctx.html(home.render()))
                 .get("/nazwiska-osob-zyjacych-wystepujace-w-rejestrze-pesel", ctx -> ctx.html(p1861.render()))
-                .start(8080);
+                .start(port());
+    }
+
+    private static int port() {
+        final ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 8080;
     }
 }

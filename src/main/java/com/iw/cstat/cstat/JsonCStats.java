@@ -14,18 +14,20 @@ import com.iw.cstat.region.SimpleRegion;
 import com.iw.cstat.relationships.SimpleRelationships;
 import com.iw.cstat.resources.SimpleResources;
 
-public final class JsonCStat implements CStat {
+import java.util.List;
 
-    private final Data data;
+public final class JsonCStats implements CStats {
+
+    private final List<Data> data;
     private final Links links;
     private final Meta meta;
     private final JsonApi jsonapi;
 
-    public JsonCStat() {
+    public JsonCStats() {
         this(null, null, null, null);
     }
 
-    public JsonCStat(Data data, Links links, Meta meta, JsonApi jsonapi) {
+    public JsonCStats(List<Data> data, Links links, Meta meta, JsonApi jsonapi) {
         this.data = data;
         this.links = links;
         this.meta = meta;
@@ -33,7 +35,7 @@ public final class JsonCStat implements CStat {
     }
 
     @Override
-    public CStat from(Object from) {
+    public CStats from(Object from) {
         final String str = (String) from;
         return new Gson().newBuilder()
                 .registerTypeAdapter(Data.class, new Serialize<>(SimpleData.class))
@@ -42,18 +44,18 @@ public final class JsonCStat implements CStat {
                 .registerTypeAdapter(JsonApi.class, new Serialize<>(SimpleJsonApi.class))
                 .registerTypeAdapter(Attributes.class, new Serialize<>(SimpleAttributes.class))
                 .registerTypeAdapter(Relationships.class, new Serialize<>(SimpleRelationships.class))
-                .registerTypeAdapter(Institution.class, new Serialize<>(SimpleInstitution.class))
                 .registerTypeAdapter(Resources.class, new Serialize<>(SimpleResources.class))
+                .registerTypeAdapter(Institution.class, new Serialize<>(SimpleInstitution.class))
                 .registerTypeAdapter(Col1.class, new Serialize<>(SimpleCol1.class))
                 .registerTypeAdapter(Col2.class, new Serialize<>(SimpleCol2.class))
                 .registerTypeAdapter(Region.class, new Serialize<>(SimpleRegion.class))
-                .registerTypeAdapter(CStat.class, new Serialize<>(JsonCStat.class))
+                .registerTypeAdapter(CStats.class, new Serialize<>(JsonCStats.class))
                 .create()
-                .fromJson(str, CStat.class);
+                .fromJson(str, CStats.class);
     }
 
     @Override
-    public Data data() {
+    public List<Data> data() {
         return data;
     }
 

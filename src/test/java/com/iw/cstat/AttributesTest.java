@@ -1,6 +1,6 @@
 package com.iw.cstat;
 
-import com.iw.cstat.api.ApiOf;
+import com.iw.cstat.api.DatasetOf;
 import com.iw.cstat.cstat.JsonCStat;
 import com.iw.cstat.res.RequestRes;
 import org.junit.Before;
@@ -14,7 +14,7 @@ public final class AttributesTest {
 
     @Before
     public void initialize() {
-        final Res res = new RequestRes(new ApiOf(1681));
+        final Res res = new RequestRes(new DatasetOf(1681));
         final CStat cStat = new JsonCStat().from(res.body());
         final Data data = cStat.data();
         this.attributes = data.attributes();
