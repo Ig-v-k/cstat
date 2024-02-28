@@ -23,6 +23,33 @@ public final class Facet1681 implements Facet<DivTag> {
         this.cStat = cStat;
     }
 
+    private static PTag subline(final CStat cStat) {
+        final String verified = new DateFormat(
+                "yyyy-MM-dd'T'HH:mm:ss'Z'",
+                cStat.data().attributes().verified(),
+                cStat.meta().language()).text();
+        final CStat institution = cStat.from(new RequestRes(
+                new InstitutionOf(cStat.data().relationships().institution().data().id())).body());
+        return p(join(
+                a(institution.data().attributes().title()).withHref(institution.data().attributes().website()), " • ",
+                "Polish", " • ",
+                verified
+        ));
+    }
+
+    private static SpanTag statline(final Data data, final List<Data> lastYearData) {
+        final Data dataYearLow = lastYearData.stream()
+                .filter(d -> d.attributes().col1().repr().equals(data.attributes().col1().repr()))
+                .findFirst()
+                .get();
+        final double valueYear = Double.parseDouble(String.valueOf(data.attributes().col2().val()));
+        final double valueYearLow = Double.parseDouble(String.valueOf(dataYearLow.attributes().col2().val()));
+        final int difference = (int) (valueYear - valueYearLow);
+        final double percent = difference / valueYearLow * 100;
+        final String text = String.format("%,d (%.1f %%) za rok", difference, percent);
+        return span(text).withClass(iffElse(difference > 0, "positive", "negative"));
+    }
+
     @Override
     public Tag<DivTag> tag() {
         final CStats cStats = new JsonCStats();
@@ -77,32 +104,5 @@ public final class Facet1681 implements Facet<DivTag> {
                                         )))))
                 )
         );
-    }
-
-    private static PTag subline(final CStat cStat) {
-        final String verified = new DateFormat(
-                "yyyy-MM-dd'T'HH:mm:ss'Z'",
-                cStat.data().attributes().verified(),
-                cStat.meta().language()).text();
-        final CStat institution = cStat.from(new RequestRes(
-                new InstitutionOf(cStat.data().relationships().institution().data().id())).body());
-        return p(join(
-                a(institution.data().attributes().title()).withHref(institution.data().attributes().website()), " • ",
-                "Polish", " • ",
-                verified
-        ));
-    }
-
-    private static SpanTag statline(final Data data, final List<Data> lastYearData) {
-        final Data dataYearLow = lastYearData.stream()
-                .filter(d -> d.attributes().col1().repr().equals(data.attributes().col1().repr()))
-                .findFirst()
-                .get();
-        final double valueYear = Double.parseDouble(String.valueOf(data.attributes().col2().val()));
-        final double valueYearLow = Double.parseDouble(String.valueOf(dataYearLow.attributes().col2().val()));
-        final int difference = (int) (valueYear - valueYearLow);
-        final double percent = difference / valueYearLow * 100;
-        final String text = String.format("%,d (%.1f %%) za rok", difference, percent);
-        return span(text).withClass(iffElse(difference > 0, "positive", "negative"));
     }
 }

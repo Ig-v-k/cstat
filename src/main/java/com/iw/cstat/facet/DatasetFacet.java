@@ -9,11 +9,7 @@ import j2html.tags.specialized.DivTag;
 import j2html.tags.specialized.PTag;
 import j2html.tags.specialized.SectionTag;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.List;
-import java.util.Locale;
 
 import static j2html.TagCreator.*;
 

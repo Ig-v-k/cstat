@@ -18,6 +18,22 @@ public final class TmplPage implements Page {
         this.facet = facet;
     }
 
+    private static HeaderTag hdr() {
+        return header(
+                nav(
+                        a("Home").withHref("/"),
+                        a("Github").withHref("https://github.com/Ig-v-k/cstat")
+                )
+        );
+    }
+
+    private static FooterTag ftr() {
+        return footer(
+                p(join("Made by ", a("@Ig-v-k").withHref("https://github.com/Ig-v-k"), ", 2024")),
+                nav(a("GitHub").withHref("https://github.com/Ig-v-k/cstat"))
+        );
+    }
+
     @Override
     public String render() {
         return html(
@@ -37,21 +53,5 @@ public final class TmplPage implements Page {
                         ftr()
                 )
         ).render();
-    }
-
-    private static HeaderTag hdr() {
-        return header(
-                nav(
-                        a("Home").withHref("/"),
-                        a("Github").withHref("https://github.com/Ig-v-k/cstat")
-                )
-        );
-    }
-
-    private static FooterTag ftr() {
-        return footer(
-                p(join("Made by ", a("@Ig-v-k").withHref("https://github.com/Ig-v-k"), ", 2024")),
-                nav(a("GitHub").withHref("https://github.com/Ig-v-k/cstat"))
-        );
     }
 }
