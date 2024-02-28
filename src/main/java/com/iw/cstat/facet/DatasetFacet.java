@@ -7,6 +7,7 @@ import com.iw.cstat.dat.DateFormat;
 import j2html.tags.Tag;
 import j2html.tags.specialized.DivTag;
 import j2html.tags.specialized.PTag;
+import j2html.tags.specialized.SectionTag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,17 +27,7 @@ public final class DatasetFacet implements Facet<DivTag> {
 
     @Override
     public Tag<DivTag> tag() {
-        return div(each(cStats, cStat -> {
-            final Data data = cStat.data();
-            return section(article(
-                    header(
-                            h2(a(data.attributes().title()).withHref("/" + data.attributes().slug())),
-                            subline(cStat)),
-                    div(attrs(".truncate"),
-                            rawHtml(data.attributes().notes())),
-                    footer(footline(data))
-            ));
-        }));
+        return div(each(cStats, this::post));
     }
 
     private Tag<PTag> subline(final CStat cStat) {
@@ -54,6 +45,18 @@ public final class DatasetFacet implements Facet<DivTag> {
                 b(String.valueOf(data.attributes().viewsCount())), "Views",
                 " • ",
                 b(String.valueOf(data.attributes().downloadsCount())), "Downloads"
+        ));
+    }
+
+    private SectionTag post(final CStat cStat) {
+        final Data data = cStat.data();
+        return section(article(
+                header(
+                        h2(a(data.attributes().title()).withHref("/" + data.attributes().slug())),
+                        subline(cStat)),
+                div(attrs(".truncate"),
+                        rawHtml(data.attributes().notes())),
+                footer(footline(data))
         ));
     }
 }
