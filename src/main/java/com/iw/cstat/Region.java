@@ -1,5 +1,5 @@
 package com.iw.cstat;
 
-public interface Regions {
+public interface Region {
     String name();
 }

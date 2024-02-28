@@ -35,9 +35,7 @@ public final class DatasetFacet implements Facet<DivTag> {
                 "yyyy-MM-dd'T'HH:mm:ss'Z'",
                 cStat.data().attributes().verified(),
                 cStat.meta().language()).text();
-        return p(join(verified, " • ",
-                String.format("%s resources", cStat.data().relationships().resources().meta().count())
-        ));
+        return p(join(cStat.data().attributes().regions()[0].name(), " • ", verified));
     }
 
     private Tag<PTag> footline(final Data data) {

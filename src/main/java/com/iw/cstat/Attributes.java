@@ -10,5 +10,5 @@ public interface Attributes {
     int downloadsCount();
     Col1 col1();
     Col2 col2();
-    Regions regions();
+    Region[] regions();
 }
