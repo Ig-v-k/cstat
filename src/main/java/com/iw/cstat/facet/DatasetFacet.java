@@ -42,9 +42,7 @@ public final class DatasetFacet implements Facet<DivTag> {
 
     private Tag<PTag> footline(final Data data) {
         return p(join(
-                b(String.valueOf(data.attributes().viewsCount())), "Views",
-                " • ",
-                b(String.valueOf(data.attributes().downloadsCount())), "Downloads"
+                b(String.valueOf(data.attributes().viewsCount())), "Views"
         ));
     }
 
