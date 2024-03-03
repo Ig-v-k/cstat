@@ -22,12 +22,17 @@ public final class Facet219 implements Facet<DivTag> {
 
     @Override
     public Tag<DivTag> tag() {
+        final String slug = cStat.data().attributes().slug();
         return div(
                 header(
                         h1(cStat.data().attributes().title()),
                         subline(cStat)),
                 div(
-                        rawHtml(cStat.data().attributes().notes())));
+                        rawHtml(cStat.data().attributes().notes()),
+                        ul(
+                                li(a("Imiona zenskie - imie perwsze").withHref(slug + "/imiona-zenskie-imie-pierwsze")),
+                                li(a("Imiona meskie - imie perwsze").withHref(slug + "/imiona-meskie-imie-pierwsze"))
+                        )));
     }
 
     private static PTag subline(final CStat cStat) {
