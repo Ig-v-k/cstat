@@ -3,7 +3,7 @@ package com.iw.cstat;
 import com.iw.cstat.page.HomePage;
 import com.iw.cstat.page.Page1681;
 import com.iw.cstat.page.Page219;
-import com.iw.cstat.page.PageFirstNames219;
+import com.iw.cstat.page.PageNames219;
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 
@@ -12,14 +12,14 @@ public class App {
         final Page home = new HomePage();
         final Page p1861 = new Page1681();
         final Page p219 = new Page219();
-        final Page pFirstNames219 = new PageFirstNames219();
+        final Page pNames219 = new PageNames219();
         Javalin.create(cfg -> {
                     cfg.staticFiles.add("/assets/public", Location.CLASSPATH);
                 })
                 .get("/", ctx -> ctx.html(home.render()))
                 .get("/nazwiska-osob-zyjacych-wystepujace-w-rejestrze-pesel", ctx -> ctx.html(p1861.render()))
                 .get("/imiona-nadawane-dzieciom-w-polsce", ctx -> ctx.html(p219.render()))
-                .get("/imiona-nadawane-dzieciom-w-polsce/first_names", ctx -> ctx.html(pFirstNames219.render()))
+                .get("/imiona-nadawane-dzieciom-w-polsce/first_names", ctx -> ctx.html(pNames219.render()))
                 .start(port());
     }
 
