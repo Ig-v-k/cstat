@@ -6,6 +6,10 @@ import com.iw.cstat.facet.ListFacet;
 public final class PageFirstNames219 implements Page {
     @Override
     public String render() {
-        return new TmplPage("Imiona zenskie - imie perwsze", new ListFacet()).render();
+        return new TmplPage(
+                "Imiona zenskie - imie perwsze",
+                "Imiona zenskie - imie perwsze",
+                "Śledź trendy w nazwach",
+                new ListFacet()).render();
     }
 }

@@ -8,6 +8,6 @@ public final class HomePage implements Page {
     @Override
     public String render() {
         final CustomDataset dataset = new CustomDataset(new String[]{"219", "1681"});
-        return new TmplPage("cstat", new DatasetFacet(dataset.list())).render();
+        return new TmplPage("cstat", "cstat", "Artykuly statystyczne", new DatasetFacet(dataset.list())).render();
     }
 }

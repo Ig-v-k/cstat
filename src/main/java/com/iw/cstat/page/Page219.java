@@ -13,6 +13,10 @@ public final class Page219 implements Page {
     public String render() {
         final Res res = new RequestRes(new DatasetOf(219));
         final CStat cstat = new JsonCStat().from(res.body());
-        return new TmplPage(cstat.data().attributes().title(), new Facet219(cstat)).render();
+        return new TmplPage(
+                cstat.data().attributes().title(),
+                cstat.data().attributes().title(),
+                "",
+                new Facet219(cstat)).render();
     }
 }
