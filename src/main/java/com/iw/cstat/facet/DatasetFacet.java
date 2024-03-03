@@ -31,7 +31,7 @@ public final class DatasetFacet implements Facet<DivTag> {
                 "yyyy-MM-dd'T'HH:mm:ss'Z'",
                 cStat.data().attributes().verified(),
                 cStat.meta().language()).text();
-        return p(join(cStat.data().attributes().regions()[0].name(), " • ", verified));
+        return p(join(verified)); // TODO: add more short info
     }
 
     private Tag<PTag> footline(final Data data) {
