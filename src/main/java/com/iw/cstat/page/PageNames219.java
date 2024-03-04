@@ -8,15 +8,29 @@ import com.iw.cstat.cstat.JsonCStat;
 import com.iw.cstat.facet.ListFacet;
 import com.iw.cstat.res.RequestRes;
 
+import java.util.Map;
+
 public final class PageNames219 implements Page {
+
+    private final Res res;
+    private final Map<String, String> params;
+
+    public PageNames219(final Map<String, String> params) {
+        this(new RequestRes(new DatasetOf(219)), params);
+    }
+
+    private PageNames219(Res res, final Map<String, String> params) {
+        this.res = res;
+        this.params = params;
+    }
+
     @Override
     public String render() {
-        final Res res = new RequestRes(new DatasetOf(219));
         final CStat cstat = new JsonCStat().from(res.body());
         return new TmplPage(
-                "Imiona zenskie - imie perwsze",
-                "Imiona zenskie - imie perwsze",
-                "Śledź trendy w nazwach",
-                new ListFacet(cstat)).render();
+                "Imiona",
+                "Imiona",
+                "Lista imion",
+                new ListFacet(cstat, params)).render();
     }
 }

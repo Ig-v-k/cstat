@@ -12,14 +12,13 @@ public class App {
         final Page home = new HomePage();
         final Page p1861 = new Page1681();
         final Page p219 = new Page219();
-        final Page pNames219 = new PageNames219();
         Javalin.create(cfg -> {
                     cfg.staticFiles.add("/assets/public", Location.CLASSPATH);
                 })
                 .get("/", ctx -> ctx.html(home.render()))
                 .get("/nazwiska-osob-zyjacych-wystepujace-w-rejestrze-pesel", ctx -> ctx.html(p1861.render()))
                 .get("/imiona-nadawane-dzieciom-w-polsce", ctx -> ctx.html(p219.render()))
-                .get("/imiona-nadawane-dzieciom-w-polsce/first_names", ctx -> ctx.html(pNames219.render()))
+                .get("/imiona-nadawane-dzieciom-w-polsce/names", ctx -> ctx.html(new PageNames219(ctx.pathParamMap()).render()))
                 .start(port());
     }
 
