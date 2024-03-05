@@ -25,9 +25,6 @@ public final class Facet219 implements Facet<DivTag> {
         final String slug = cStat.data().attributes().slug();
         return div(
                 rawHtml(cStat.data().attributes().notes()),
-                ul(
-                        li(a("Imiona zenskie - imie perwsze").withHref(slug + "/imiona-zenskie-imie-pierwsze")),
-                        li(a("Imiona meskie - imie perwsze").withHref(slug + "/imiona-meskie-imie-pierwsze"))
-                ));
+                a("Tablica statyczna").withHref(slug + "/names"));
     }
 }
