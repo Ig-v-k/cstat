@@ -18,7 +18,7 @@ public class App {
                 .get("/", ctx -> ctx.html(home.render()))
                 .get("/nazwiska-osob-zyjacych-wystepujace-w-rejestrze-pesel", ctx -> ctx.html(p1861.render()))
                 .get("/imiona-nadawane-dzieciom-w-polsce", ctx -> ctx.html(p219.render()))
-                .get("/imiona-nadawane-dzieciom-w-polsce/names", ctx -> ctx.html(new PageNames219(ctx.pathParamMap()).render()))
+                .get("/imiona-nadawane-dzieciom-w-polsce/names", ctx -> ctx.html(new PageNames219(ctx.queryParamMap()).render()))
                 .start(port());
     }
 

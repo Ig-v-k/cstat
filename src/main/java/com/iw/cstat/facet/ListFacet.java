@@ -7,6 +7,7 @@ import com.iw.cstat.cstat.JsonCStats;
 import j2html.tags.Tag;
 import j2html.tags.specialized.MainTag;
 
+import java.util.List;
 import java.util.Map;
 
 import static j2html.TagCreator.*;
@@ -14,9 +15,9 @@ import static j2html.TagCreator.*;
 public final class ListFacet implements Facet<MainTag> {
 
     private final CStat cStat;
-    private final Map<String, String> filters;
+    private final Map<String, List<String>> filters;
 
-    public ListFacet(CStat cStat, Map<String, String> filters) {
+    public ListFacet(CStat cStat, Map<String, List<String>> filters) {
         this.cStat = cStat;
         this.filters = filters;
     }
@@ -30,8 +31,6 @@ public final class ListFacet implements Facet<MainTag> {
                 "sort=-created",
                 "per_page=1"};
 
-        return main(
-                table(each())
-        );
+        return main("test");
     }
 }
