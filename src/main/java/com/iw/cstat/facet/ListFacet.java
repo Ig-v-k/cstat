@@ -1,7 +1,12 @@
 package com.iw.cstat.facet;
 
 import com.iw.cstat.CStat;
+import com.iw.cstat.CStats;
+import com.iw.cstat.Data;
 import com.iw.cstat.Facet;
+import com.iw.cstat.api.*;
+import com.iw.cstat.cstat.JsonCStats;
+import com.iw.cstat.res.RequestRes;
 import j2html.tags.DomContent;
 import j2html.tags.Tag;
 import j2html.tags.specialized.ButtonTag;
@@ -28,9 +33,18 @@ public final class ListFacet implements Facet<MainTag> {
     @Override
     public Tag<MainTag> tag() {
         final String[] params = params();
+        final CStats cStats = new JsonCStats();
+        final CStats resources = cStats.from(new RequestRes(new ResourcesAPI(new DatasetOf(219), params)).body());
+        final Data data = resources.data().get(0);
+        final CStats resourceData = cStats.from(new RequestRes(new DataAPI(new ResourceAPI(new PolishAPI(), data.id()))).body());
+        final List<Data> cols = resourceData.data();
         return main(
                 p(Arrays.toString(params)),
-                filters());
+                filters(),
+                table(each(cols, (i, d) -> tr(
+                        td(String.valueOf(i + 1)),
+                        td(d.attributes().col1().repr())
+                ))));
     }
 
     private String[] params() {
@@ -40,7 +54,7 @@ public final class ListFacet implements Facet<MainTag> {
                 String.format("title[prefix]=imiona %s", sex),
                 String.format("title[phrase]=r. - imię %s", name),
                 "sort=-created",
-                "per_page=100",
+                "per_page=1",
                 "page=1"};
     }
 
