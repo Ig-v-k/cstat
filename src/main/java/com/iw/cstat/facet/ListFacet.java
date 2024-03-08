@@ -42,7 +42,9 @@ public final class ListFacet implements Facet<MainTag> {
                 new RequestRes(new DataAPI(new ResourceAPI(new PolishAPI(), data.id()), "per_page=100")).body());
         final List<Data> cols = resourceData.data();
         return main(
-                filters(),
+                aside(
+                        p(b("Filtry")),
+                        filters()),
                 table(tbody(each(cols, (i, d) -> tr(
                         td(String.valueOf(i + 1)),
                         td(d.attributes().col1().repr()),
