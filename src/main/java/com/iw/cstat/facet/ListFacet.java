@@ -39,7 +39,6 @@ public final class ListFacet implements Facet<MainTag> {
         final CStats resourceData = cStats.from(new RequestRes(new DataAPI(new ResourceAPI(new PolishAPI(), data.id()))).body());
         final List<Data> cols = resourceData.data();
         return main(
-                p(Arrays.toString(params)),
                 filters(),
                 table(each(cols, (i, d) -> tr(
                         td(String.valueOf(i + 1)),
