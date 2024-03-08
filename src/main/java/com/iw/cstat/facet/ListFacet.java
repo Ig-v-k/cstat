@@ -13,7 +13,7 @@ import j2html.tags.specialized.ButtonTag;
 import j2html.tags.specialized.MainTag;
 import j2html.tags.specialized.SelectTag;
 
-import java.util.Arrays;
+import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +24,7 @@ public final class ListFacet implements Facet<MainTag> {
 
     private final CStat cStat;
     private final Map<String, List<String>> filters;
+    final DecimalFormat decimalFormat = new DecimalFormat("#,###,###,###");
 
     public ListFacet(CStat cStat, Map<String, List<String>> filters) {
         this.cStat = cStat;
@@ -34,16 +35,19 @@ public final class ListFacet implements Facet<MainTag> {
     public Tag<MainTag> tag() {
         final String[] params = params();
         final CStats cStats = new JsonCStats();
-        final CStats resources = cStats.from(new RequestRes(new ResourcesAPI(new DatasetOf(219), params)).body());
+        final CStats resources = cStats.from(
+                new RequestRes(new ResourcesAPI(new DatasetOf(219), params)).body());
         final Data data = resources.data().get(0);
-        final CStats resourceData = cStats.from(new RequestRes(new DataAPI(new ResourceAPI(new PolishAPI(), data.id()))).body());
+        final CStats resourceData = cStats.from(
+                new RequestRes(new DataAPI(new ResourceAPI(new PolishAPI(), data.id()), "per_page=100")).body());
         final List<Data> cols = resourceData.data();
         return main(
                 filters(),
-                table(each(cols, (i, d) -> tr(
+                table(tbody(each(cols, (i, d) -> tr(
                         td(String.valueOf(i + 1)),
-                        td(d.attributes().col1().repr())
-                ))));
+                        td(d.attributes().col1().repr()),
+                        td(b(decimalFormat.format(d.attributes().col3().val())))
+                )))));
     }
 
     private String[] params() {

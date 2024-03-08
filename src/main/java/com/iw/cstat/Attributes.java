@@ -19,5 +19,7 @@ public interface Attributes {
 
     Col2 col2();
 
+    Col3 col3();
+
     Region[] regions();
 }

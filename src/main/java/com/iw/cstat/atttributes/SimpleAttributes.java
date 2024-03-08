@@ -1,9 +1,6 @@
 package com.iw.cstat.atttributes;
 
-import com.iw.cstat.Attributes;
-import com.iw.cstat.Col1;
-import com.iw.cstat.Col2;
-import com.iw.cstat.Region;
+import com.iw.cstat.*;
 
 public final class SimpleAttributes implements Attributes {
 
@@ -16,9 +13,10 @@ public final class SimpleAttributes implements Attributes {
     private final int downloads_count;
     private final Col1 col1;
     private final Col2 col2;
+    private final Col3 col3;
     private final Region[] regions;
 
-    public SimpleAttributes(String slug, String verified, String notes, String title, String website, int views_count, int downloads_count, Col1 col1, Col2 col2, Region[] regions) {
+    public SimpleAttributes(String slug, String verified, String notes, String title, String website, int views_count, int downloads_count, Col1 col1, Col2 col2, Col3 col3, Region[] regions) {
         this.slug = slug;
         this.verified = verified;
         this.notes = notes;
@@ -28,6 +26,7 @@ public final class SimpleAttributes implements Attributes {
         this.downloads_count = downloads_count;
         this.col1 = col1;
         this.col2 = col2;
+        this.col3 = col3;
         this.regions = regions;
     }
 
@@ -74,6 +73,11 @@ public final class SimpleAttributes implements Attributes {
     @Override
     public Col2 col2() {
         return col2;
+    }
+
+    @Override
+    public Col3 col3() {
+        return col3;
     }
 
     @Override
