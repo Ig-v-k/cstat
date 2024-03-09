@@ -45,11 +45,14 @@ public final class ListFacet implements Facet<MainTag> {
                 aside(
                         p(b("Filtry")),
                         filters()),
-                table(tbody(each(cols, (i, d) -> tr(
-                        td(String.valueOf(i + 1)),
-                        td(d.attributes().col1().repr()),
-                        td(b(decimalFormat.format(d.attributes().col3().val())))
-                )))));
+                table(tbody(each(cols, (i, d) -> {
+                    final String name = d.attributes().col1().repr();
+                    return tr(
+                            td(String.valueOf(i + 1)),
+                            td(a(name).withHref("/names/" + name.toLowerCase())),
+                            td(b(decimalFormat.format(d.attributes().col3().val())))
+                    );
+                }))));
     }
 
     private String[] params() {
