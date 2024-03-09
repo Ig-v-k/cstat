@@ -1,9 +1,6 @@
 package com.iw.cstat;
 
-import com.iw.cstat.page.HomePage;
-import com.iw.cstat.page.Page1681;
-import com.iw.cstat.page.Page219;
-import com.iw.cstat.page.PageNames219;
+import com.iw.cstat.page.*;
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 
@@ -19,6 +16,7 @@ public class App {
                 .get("/nazwiska-osob-zyjacych-wystepujace-w-rejestrze-pesel", ctx -> ctx.html(p1861.render()))
                 .get("/imiona-nadawane-dzieciom-w-polsce", ctx -> ctx.html(p219.render()))
                 .get("/imiona-nadawane-dzieciom-w-polsce/names", ctx -> ctx.html(new PageNames219(ctx.queryParamMap()).render()))
+                .get("/names/{name}", ctx -> ctx.html(new NamePage(ctx.pathParam("name")).render()))
                 .start(port());
     }
 
