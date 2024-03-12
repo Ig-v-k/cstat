@@ -7,4 +7,4 @@
 [![Hits-of-Code](https://hitsofcode.com/github/Ig-v-k/cstat?branch=main&label=Hits-of-Code)](https://hitsofcode.com/github/Ig-v-k/cstat/view?branch=main&label=Hits-of-Code)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/Ig-v-k/cstat/blob/main/LICENSE)
 
-**cstat** is about a country statistics, based on API goverment
+**cstat** is about a data statistics, based on API goverment
