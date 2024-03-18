@@ -4,8 +4,9 @@ import com.iw.cstat.Facet;
 import com.iw.cstat.Page;
 import j2html.tags.Tag;
 import j2html.tags.specialized.FooterTag;
-import j2html.tags.specialized.H1Tag;
 import j2html.tags.specialized.HeaderTag;
+
+import java.util.List;
 
 import static j2html.TagCreator.*;
 
@@ -14,17 +15,21 @@ public final class TmplPage implements Page {
     private final String title;
     private final String headerTitle;
     private final String headerSubtitle;
-    private final Facet<? extends Tag<?>> facet;
+    private final List<Facet<? extends Tag<?>>> facets;
 
-    public TmplPage(String title, Facet<? extends Tag<?>> facet) {
-        this(title, "", "", facet);
+    public TmplPage(String title, Facet<? extends Tag<?>>... facets) {
+        this(title, "", "", facets);
     }
 
-    public TmplPage(String title, String headerTitle, String headerSubtitle, Facet<? extends Tag<?>> facet) {
+    public TmplPage(String title, String headerTitle, String headerSubtitle, Facet<? extends Tag<?>>... facets) {
+        this(title, headerTitle, headerSubtitle, List.of(facets));
+    }
+
+    public TmplPage(String title, String headerTitle, String headerSubtitle, List<Facet<? extends Tag<?>>> facets) {
         this.title = title;
         this.headerTitle = headerTitle;
         this.headerSubtitle = headerSubtitle;
-        this.facet = facet;
+        this.facets = facets;
     }
 
     private static HeaderTag hdr(final String title, final String subtitle) {
@@ -61,7 +66,7 @@ public final class TmplPage implements Page {
                 ),
                 body(
                         hdr(headerTitle, headerSubtitle),
-                        facet.tag(),
+                        each(facets, f -> f.tag()),
                         ftr()
                 )
         ).render();

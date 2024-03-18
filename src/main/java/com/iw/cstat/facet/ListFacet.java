@@ -76,7 +76,7 @@ public final class ListFacet implements Facet<MainTag> {
         final ButtonTag submit = button("Filtruj").withType("submit");
         return form()
                 .withMethod("get")
-                .withAction("/imiona-nadawane-dzieciom-w-polsce/names")
+                .withAction("/imiona-nadawane-dzieciom-w-polsce")
                 .with(sex, name, submit);
     }
 }

@@ -22,9 +22,7 @@ public final class Facet219 implements Facet<DivTag> {
 
     @Override
     public Tag<DivTag> tag() {
-        final String slug = cStat.data().attributes().slug();
         return div(
-                rawHtml(cStat.data().attributes().notes()),
-                a("Tablica statyczna").withHref(slug + "/names"));
+                rawHtml(cStat.data().attributes().notes()));
     }
 }

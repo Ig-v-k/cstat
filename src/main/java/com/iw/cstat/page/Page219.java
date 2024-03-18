@@ -4,16 +4,23 @@ import com.iw.cstat.CStat;
 import com.iw.cstat.Page;
 import com.iw.cstat.Res;
 import com.iw.cstat.api.DatasetOf;
-import com.iw.cstat.api.InstitutionOf;
 import com.iw.cstat.cstat.JsonCStat;
 import com.iw.cstat.dat.DateFormat;
 import com.iw.cstat.facet.Facet219;
+import com.iw.cstat.facet.ListFacet;
 import com.iw.cstat.res.RequestRes;
-import j2html.tags.specialized.PTag;
 
-import static j2html.TagCreator.*;
+import java.util.List;
+import java.util.Map;
 
 public final class Page219 implements Page {
+
+    private final Map<String, List<String>> params;
+
+    public Page219(Map<String, List<String>> params) {
+        this.params = params;
+    }
+
     @Override
     public String render() {
         final Res res = new RequestRes(new DatasetOf(219));
@@ -22,7 +29,7 @@ public final class Page219 implements Page {
                 cstat.data().attributes().title(),
                 cstat.data().attributes().title(),
                 subline(cstat),
-                new Facet219(cstat)).render();
+                new Facet219(cstat), new ListFacet(cstat, params)).render();
     }
 
     private static String subline(final CStat cStat) {
