@@ -17,10 +17,11 @@ public final class NamePage implements Page {
 
     @Override
     public String render() {
+        final String upName = name.toUpperCase();
         return new TmplPage(
-                name,
-                name,
-                String.format("About %s", name),
+                upName,
+                upName,
+                String.format("About %s", upName),
                 new Facet<SpanTag>() {
                     @Override
                     public Tag<SpanTag> tag() {
