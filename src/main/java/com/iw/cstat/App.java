@@ -12,7 +12,7 @@ public class App {
                 .get("/", ctx -> ctx.html(home.render()))
                 .get("/nazwiska-osob-zyjacych-wystepujace-w-rejestrze-pesel", ctx -> ctx.html(p1861.render()))
                 .get("/imiona-nadawane-dzieciom-w-polsce", ctx -> ctx.html(new Page219(ctx.queryParamMap()).render()))
-                .get("/names/{name}", ctx -> ctx.html(new NamePage(ctx.pathParam("name")).render()))
+                .get("/name/{order}/{sex}/{name}", ctx -> ctx.html(new NamePage(ctx.pathParamMap()).render()))
                 .start(port());
     }
 
