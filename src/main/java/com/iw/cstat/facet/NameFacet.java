@@ -19,7 +19,7 @@ public final class NameFacet implements Facet<MainTag> {
     @Override
     public Tag<MainTag> tag() {
         return main(
-                h2(data.attributes().col3().repr())
+                h2(data.attributes().col3().repr()).withStyle("font-size:72px;")
         );
     }
 }
