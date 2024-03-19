@@ -41,6 +41,10 @@ public final class ListFacet implements Facet<MainTag> {
         final CStats resourceData = cStats.from(
                 new RequestRes(new DataAPI(new ResourceAPI(new PolishAPI(), data.id()), "per_page=100")).body());
         final List<Data> cols = resourceData.data();
+
+        final String order = filters.getOrDefault("name", Collections.singletonList("first")).get(0);
+        final String sex = filters.getOrDefault("sex", Collections.singletonList("woman")).get(0);
+
         return main(
                 aside(
                         p(b("Filtry")),
@@ -49,15 +53,19 @@ public final class ListFacet implements Facet<MainTag> {
                     final String name = d.attributes().col1().repr();
                     return tr(
                             td(String.valueOf(i + 1)),
-                            td(a(name).withHref("/names/" + name.toLowerCase())),
+                            td(a(name).withHref(String.format("/name/%s/%s/%s", sex, order, name.toLowerCase()))),
                             td(b(decimalFormat.format(d.attributes().col3().val())))
                     );
                 }))));
     }
 
     private String[] params() {
-        final String name = filters.getOrDefault("name", Collections.singletonList("pierwsze")).get(0);
-        final String sex = filters.getOrDefault("sex", Collections.singletonList("żeńskie")).get(0);
+        final String nameParam = filters.getOrDefault("name", Collections.singletonList("first")).get(0);
+        final String sexParam = filters.getOrDefault("sex", Collections.singletonList("woman")).get(0);
+
+        final String name = nameParam.equals("first") ? "pierwsze" : "drugie";
+        final String sex = sexParam.equals("woman") ? "żeńskie" : "męskie";
+
         return new String[] {
                 String.format("title[prefix]=imiona %s", sex),
                 String.format("title[phrase]=r. - imię %s", name),
@@ -68,11 +76,11 @@ public final class ListFacet implements Facet<MainTag> {
 
     private DomContent filters() {
         final SelectTag sex = select(
-                option("żeńskie").withValue("żeńskie"),
-                option("męskie").withValue("męskie")).withName("sex");
+                option("żeńskie").withValue("woman"),
+                option("męskie").withValue("man")).withName("sex");
         final SelectTag name = select(
-                option("pierwsze").withValue("pierwsze"),
-                option("drugie").withValue("drugie")).withName("name");
+                option("pierwsze").withValue("first"),
+                option("drugie").withValue("second")).withName("name");
         final ButtonTag submit = button("Filtruj").withType("submit");
         return form()
                 .withMethod("get")
