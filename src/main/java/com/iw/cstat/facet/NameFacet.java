@@ -23,6 +23,8 @@ public final class NameFacet implements Facet<MainTag> {
     public Tag<MainTag> tag() {
         final String count = decimalFormat.format(data.attributes().col3().val());
         return main(
+                span("Liczba wystapien za ostatni rok:"),
+                br(),
                 span(count).withStyle("font-size:96px;")
         );
     }

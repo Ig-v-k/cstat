@@ -9,6 +9,7 @@ import com.iw.cstat.cstat.JsonCStats;
 import com.iw.cstat.facet.NameFacet;
 import com.iw.cstat.params.NameParams;
 import com.iw.cstat.res.RequestRes;
+import com.iw.cstat.subtitle.ParamsSubtitle;
 
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,7 @@ public final class NamePage implements Page {
         return new TmplPage(
                 upName,
                 upName,
-                String.format("About %s", upName),
+                new ParamsSubtitle(this.params).text(),
                 new NameFacet(col)).render();
     }
 }
