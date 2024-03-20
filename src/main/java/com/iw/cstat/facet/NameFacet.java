@@ -5,12 +5,15 @@ import com.iw.cstat.Facet;
 import j2html.tags.Tag;
 import j2html.tags.specialized.MainTag;
 
-import static j2html.TagCreator.h2;
-import static j2html.TagCreator.main;
+import java.text.DecimalFormat;
+
+import static j2html.TagCreator.*;
 
 public final class NameFacet implements Facet<MainTag> {
 
     private final Data data;
+
+    private final DecimalFormat decimalFormat = new DecimalFormat("#,###,###,###");
 
     public NameFacet(Data data) {
         this.data = data;
@@ -18,8 +21,9 @@ public final class NameFacet implements Facet<MainTag> {
 
     @Override
     public Tag<MainTag> tag() {
+        final String count = decimalFormat.format(data.attributes().col3().val());
         return main(
-                h2(data.attributes().col3().repr()).withStyle("font-size:72px;")
+                span(count).withStyle("font-size:96px;")
         );
     }
 }
